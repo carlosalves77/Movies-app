@@ -1,4 +1,4 @@
-package com.carlos.movies_app
+package com.carlos.movies_app.core.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
