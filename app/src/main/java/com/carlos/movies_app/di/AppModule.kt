@@ -1,5 +1,6 @@
 package com.carlos.movies_app.di
 
+import android.app.Application
 import com.carlos.movies_app.data.remote.MovieApi
 import dagger.Module
 import dagger.Provides
@@ -34,6 +35,11 @@ object AppModule {
   }
 
     // TODO - Create Database Provide
+    @Singleton
+    @Provides
+    fun providesMovieDatabase(app: Application):  {
+
+    }
 
 
 }
