@@ -1,6 +1,9 @@
 package com.carlos.movies_app.di
 
 import android.app.Application
+import androidx.room.Room
+import com.carlos.movies_app.data.local.movie.MovieDao
+import com.carlos.movies_app.data.local.movie.MovieDatabase
 import com.carlos.movies_app.data.remote.MovieApi
 import dagger.Module
 import dagger.Provides
@@ -24,21 +27,25 @@ object AppModule {
         .addInterceptor(interceptor)
         .build()
 
-  @Provides
-  @Singleton
-  fun providesMovieApi() : MovieApi {
-         return Retrofit.Builder()
-             .addConverterFactory(GsonConverterFactory.create())
-             .client(client)
-             .build()
-             .create(MovieApi::class.java)
-  }
+    @Provides
+    @Singleton
+    fun providesMovieApi(): MovieApi {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+            .create(MovieApi::class.java)
+    }
 
     // TODO - Create Database Provide
     @Singleton
     @Provides
-    fun providesMovieDatabase(app: Application):  {
-
+    fun providesMovieDatabase(app: Application): MovieDatabase {
+        return Room.databaseBuilder(
+            app,
+            MovieDatabase::class.java,
+            "moviedb.db"
+        ).build()
     }
 
 
